@@ -1,5 +1,9 @@
+
+import 'package:amazon/common/widgets/custom_button.dart';
+import 'package:amazon/common/widgets/custom_textfield.dart';
 import 'package:amazon/constants/global_variables.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 enum Auth {
   signin,
   signup,
@@ -17,19 +21,31 @@ class _AuthScreenState extends State<AuthScreen>{
   Auth _auth =Auth.signup;
   final _signUpFormKey = GlobalKey<FormState>();
     final _signinFormKey = GlobalKey<FormState>();
-  
+
+  final TextEditingController _emailcontroller =TextEditingController();
+   final TextEditingController _passwordcontroller =TextEditingController();
+    final TextEditingController _namecontroller =TextEditingController();
+
+    @override
+    void dipose(){
+      super.dispose();
+      _emailcontroller.dispose();
+      _passwordcontroller.dispose();
+      _namecontroller.dispose();
+    }
   @override 
+
   Widget build (BuildContext context){
     
     return Scaffold(
       backgroundColor: GlobalVariables.greyBackgroundCOlor,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
-            
+               crossAxisAlignment:CrossAxisAlignment.start ,
             children: [
-              Text("Welcome" ,
+              const Text("Welcome" ,
                style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
@@ -39,6 +55,8 @@ class _AuthScreenState extends State<AuthScreen>{
                 style : TextStyle(
                   fontWeight: FontWeight.bold,
                 )),
+                    tileColor: _auth == Auth.signup?
+                  GlobalVariables.backgroundColor :GlobalVariables.greyBackgroundCOlor,
                 leading: Radio(
                   activeColor: GlobalVariables.secondaryColor,
                   value:  Auth.signup,
@@ -54,14 +72,38 @@ class _AuthScreenState extends State<AuthScreen>{
                if(
                 _auth == Auth.signup
                )
-               Form(
-                key:   _signUpFormKey ,
-                child: Column(
-                  
-                ),
+               Container(
+                padding: const EdgeInsets.all(8),
+                color: GlobalVariables.backgroundColor,
+                 child: Form(
+                  key:   _signUpFormKey ,
+                  child: Column(
+                 
+                    children :[
+                        CustomTextField(
+                        controller: _namecontroller, hintText: 'Name',),
+                        const SizedBox(height: 10,),
+                      CustomTextField(
+                        controller: _emailcontroller,
+                         hintText: 'Email' ,),
+                          const SizedBox(height: 10,),
+                         CustomTextField(
+                        controller: _passwordcontroller, hintText: 'Password',),
+                        const SizedBox(height: 10,),
+                        CustomButton(text:"Sign Up " , onTap: (){
+
+                        }
+                        )
+                       
+                             ],
+                  ),
+                 ),
                ),
                 ListTile(
-                title: const Text('sign-in',
+                   tileColor: _auth == Auth.signin?
+                  GlobalVariables.backgroundColor :GlobalVariables.greyBackgroundCOlor,
+              
+                title: const Text('sign In',
                 style : TextStyle(
                   fontWeight: FontWeight.bold,
                 )),
@@ -76,7 +118,35 @@ class _AuthScreenState extends State<AuthScreen>{
                   }
 
              ),
+               ),
+               if(
+                _auth == Auth.signin
                )
+               Container(
+                padding: const EdgeInsets.all(8),
+                color: GlobalVariables.backgroundColor,
+                 child: Form(
+                  key:   _signUpFormKey ,
+                  child: Column(
+                 
+                    children :[
+                       
+                      CustomTextField(
+                        controller: _emailcontroller,
+                         hintText: 'Email' ,),
+                          const SizedBox(height: 10,),
+                         CustomTextField(
+                        controller: _passwordcontroller, hintText: 'Password',),
+                        const SizedBox(height: 10,),
+                        CustomButton(text:"Sign In " , onTap: (){
+
+                        }
+                        )
+                       
+                             ],
+                  ),
+                 ),
+               ),
             ],
           ),
         ),

@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
       title: 'Amazon',
       theme: ThemeData(
        scaffoldBackgroundColor: GlobalVariables.backgroundColor,
-       colorScheme:  ColorScheme.light(
+       colorScheme:  const ColorScheme.light(
         primary: GlobalVariables.secondaryColor,
        ),
         appBarTheme: const AppBarTheme(
-          color: GlobalVariables.secondaryColor,
+         
           elevation: 0,
           iconTheme: IconThemeData(
             color: Colors.black,
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home:  AuthScreen(),
+      home:  const AuthScreen(),
     );
   }
 }
