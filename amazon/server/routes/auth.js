@@ -1,6 +1,9 @@
 const express = require('express');
 const authRouter = express.Router(); //--> use only in this file 
 const User = require("../models/user");
+const bcryptjs = require('bcryptjs');
+
+//Sign Up
 authRouter.post("/api/signup", async (req , res)=>
  {
   try {
@@ -12,10 +15,11 @@ authRouter.post("/api/signup", async (req , res)=>
         .status(400)
         .json({ msg: "User with same email already exists!" });
     }
+    const hashedPassword = await  bcryptjs.hash(password , 8);
 
        let user = new User({
       email,
-      password,
+      password :hashedPassword,
       name,
     });
     user = await user.save();

@@ -7,7 +7,7 @@ const authRouter = require('./routes/auth');
 const PORT = 1928;
 const app =express();
 const DB =
-"mongodb+srv://firasfouad:mtc1965@cluster0.6imcefj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+"mongodb+srv://foued:foued123@cluster0.hrmxm12.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 //middleware 
 app.use(express.json());
 app.use(authRouter);
@@ -21,7 +21,7 @@ app.use(authRouter);
     }
 );
 
-app.listen(PORT , () =>{
+app.listen(PORT ,"0.0.0.0", () =>{
     console.log(`connected at port ${PORT}`);
 })
 //localhost
