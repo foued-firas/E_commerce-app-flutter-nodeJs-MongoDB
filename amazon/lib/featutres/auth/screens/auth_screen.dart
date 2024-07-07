@@ -2,6 +2,7 @@
 import 'package:amazon/common/widgets/custom_button.dart';
 import 'package:amazon/common/widgets/custom_textfield.dart';
 import 'package:amazon/constants/global_variables.dart';
+import 'package:amazon/featutres/auth/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 enum Auth {
@@ -19,8 +20,10 @@ class AuthScreen extends StatefulWidget{
 }
 class _AuthScreenState extends State<AuthScreen>{
   Auth _auth =Auth.signup;
+ 
   final _signUpFormKey = GlobalKey<FormState>();
     final _signinFormKey = GlobalKey<FormState>();
+final AuthService authService = AuthService();
 
   final TextEditingController _emailcontroller =TextEditingController();
    final TextEditingController _passwordcontroller =TextEditingController();
@@ -32,6 +35,13 @@ class _AuthScreenState extends State<AuthScreen>{
       _emailcontroller.dispose();
       _passwordcontroller.dispose();
       _namecontroller.dispose();
+    }
+    void signUpUser(){
+        authService.signUpUser(
+          context: context,
+           email: _emailcontroller.text,
+            password: _passwordcontroller.text,
+             name: _namecontroller.text);
     }
   @override 
 
@@ -83,7 +93,7 @@ class _AuthScreenState extends State<AuthScreen>{
                         CustomTextField(
                         controller: _namecontroller, hintText: 'Name',),
                         const SizedBox(height: 10,),
-                      CustomTextField(
+                        CustomTextField(
                         controller: _emailcontroller,
                          hintText: 'Email' ,),
                           const SizedBox(height: 10,),
@@ -91,6 +101,9 @@ class _AuthScreenState extends State<AuthScreen>{
                         controller: _passwordcontroller, hintText: 'Password',),
                         const SizedBox(height: 10,),
                         CustomButton(text:"Sign Up " , onTap: (){
+                        if(_signUpFormKey.currentState!.validate()){
+                          signUpUser();
+                        }
 
                         }
                         )
