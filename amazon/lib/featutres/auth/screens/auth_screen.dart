@@ -42,7 +42,14 @@ final AuthService authService = AuthService();
            email: _emailcontroller.text,
             password: _passwordcontroller.text,
              name: _namecontroller.text);
-    }
+    } 
+    void signInUser(){
+        authService.signInUser(
+          context: context,
+         email:_emailcontroller.text ,
+          password:_passwordcontroller.text );
+         
+    } 
   @override 
 
   Widget build (BuildContext context){
@@ -139,7 +146,7 @@ final AuthService authService = AuthService();
                 padding: const EdgeInsets.all(8),
                 color: GlobalVariables.backgroundColor,
                  child: Form(
-                  key:   _signUpFormKey ,
+                  key:   _signinFormKey ,
                   child: Column(
                  
                     children :[
@@ -152,6 +159,10 @@ final AuthService authService = AuthService();
                         controller: _passwordcontroller, hintText: 'Password',),
                         const SizedBox(height: 10,),
                         CustomButton(text:"Sign In " , onTap: (){
+                           if(_signinFormKey.currentState!.validate()){
+                          signInUser();
+                        }
+
 
                         }
                         )
