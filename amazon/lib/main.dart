@@ -1,5 +1,3 @@
-
-
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/featutres/auth/screens/auth_screen.dart';
 import 'package:amazon/featutres/auth/services/auth_services.dart';
