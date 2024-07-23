@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:amazon/common/widgets/bottom_bar.dart';
 import 'package:amazon/constants/error_handling.dart';
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/constants/utils.dart';
@@ -79,7 +80,8 @@ class AuthService {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
-            Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
+            Navigator.pushNamedAndRemoveUntil(context,
+             BottomBar.routeName, (route) => false);
         },
       );
     } catch (e) {
