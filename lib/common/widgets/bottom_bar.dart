@@ -1,9 +1,10 @@
 import 'package:amazon/constants/global_variables.dart';
+import 'package:badges/badges.dart' as badges_package; // Aliasing the badges package
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatefulWidget {
-  static const String routeName ='/actual-home';
-  
+  static const String routeName = '/actual-home';
+
   const BottomBar({super.key});
 
   @override
@@ -12,9 +13,14 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   int _page = 0;
-  double bottomBarWidth =42;
-    double bottomBarBorderWidth =5;
+  double bottomBarWidth = 42;
+  double bottomBarBorderWidth = 5;
 
+  void _updatePage(int page) {
+    setState(() {
+      _page = page;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,64 +31,73 @@ class _BottomBarState extends State<BottomBar> {
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
         backgroundColor: GlobalVariables.backgroundColor,
         iconSize: 28,
+        onTap: _updatePage,
         items: [
-                    
-          //Home
-          BottomNavigationBarItem(icon:Container(
-            width: bottomBarWidth,
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: _page ==0? GlobalVariables.selectedNavBarColor
-                  : GlobalVariables.backgroundColor,
-                  width: bottomBarBorderWidth,
-
+          // Home
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: _page == 0
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
                 ),
-                
+              ),
+              child: const Icon(Icons.home_outlined),
+            ),
+            label: '',
+          ),
+          // Account
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: _page == 1
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child: const Icon(Icons.person_outline_outlined),
+            ),
+            label: '',
+          ),
+          // Cart
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: _page == 2
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child: badges_package.Badge( // Using the alias to specify the badges package
+                badgeContent: const Text(
+                  '2',
+                  style: TextStyle(color: Colors.black),
+                ),
+                badgeStyle: const badges_package.BadgeStyle(
+                  elevation: 0,
+                  badgeColor: Colors.white,
+                ),
+                child: const Icon(Icons.shopping_cart_outlined),
               ),
             ),
-            child: const Icon(Icons.home_outlined),
+            label: '',
           ),
-          label: '',
-          ),
-          //account
-          BottomNavigationBarItem(icon:Container(
-            width: bottomBarWidth,
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: _page ==1? GlobalVariables.selectedNavBarColor
-                  : GlobalVariables.backgroundColor,
-                  width: bottomBarBorderWidth,
-
-                ),
-                
-              ),
-            ),
-            child: const Icon(Icons.person_outline_outlined),
-          ),
-          label: '',
-          //cart
-          ),
-          BottomNavigationBarItem(icon:Container(
-            width: bottomBarWidth,
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: _page ==2? GlobalVariables.selectedNavBarColor
-                  : GlobalVariables.backgroundColor,
-                  width: bottomBarBorderWidth,
-
-                ),
-                
-              ),
-            ),
-            child: const Icon(Icons.card_travel),
-          ),
-                    label: '',),
         ],
-
-        
       ),
     );
   }
