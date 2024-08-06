@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class DealOfDay extends StatefulWidget {
   const DealOfDay({super.key});
@@ -30,22 +31,46 @@ class _DealOfDayState extends State<DealOfDay> {
         Container(
           padding: EdgeInsets.only(left: 15),
           alignment: Alignment.topLeft,
-          child: Text('\$100', style: TextStyle(fontSize: 18),),
+          child: Text('\$20', style: TextStyle(fontSize: 18),),
         ),
         Container(
           alignment: Alignment.topLeft,
           padding: EdgeInsets.only(right: 40,top: 5, left: 15),
           child: Text(
-            'Soula ',
+            'Radio ',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.network('https://images.unsplash.com/photo-1550222029-a7a8070f7673?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTh8NjM2MzcwNTR8fGVufDB8fHx8fA%3D%3D',fit: BoxFit.fitWidth,width: 100,)
-          ],
+        SingleChildScrollView(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.network('https://images.unsplash.com/photo-1550222029-a7a8070f7673?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTh8NjM2MzcwNTR8fGVufDB8fHx8fA%3D%3D',
+              fit: BoxFit.fitWidth,
+              width: 100,
+              height: 100,),
+               Image.network('https://images.unsplash.com/photo-1550222029-a7a8070f7673?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTh8NjM2MzcwNTR8fGVufDB8fHx8fA%3D%3D',
+              fit: BoxFit.fitWidth,
+              width: 100,
+              height: 100,),
+               Image.network('https://images.unsplash.com/photo-1550222029-a7a8070f7673?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTh8NjM2MzcwNTR8fGVufDB8fHx8fA%3D%3D',
+              fit: BoxFit.fitWidth,
+              width: 100,
+              height: 100,),
+              Image.network('https://images.unsplash.com/photo-1550222029-a7a8070f7673?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTh8NjM2MzcwNTR8fGVufDB8fHx8fA%3D%3D',
+              fit: BoxFit.fitWidth,
+              width: 100,
+              height: 100,),
+            ],
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 15).copyWith(left: 15),
+          alignment: Alignment.topLeft,
+          child: Text('See all deals',style: TextStyle(
+            color: Colors.cyan[800],
+          ),),
         )
       ],
 
