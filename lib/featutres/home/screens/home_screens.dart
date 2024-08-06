@@ -1,5 +1,8 @@
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/featutres/home/widgets/address_box.dart';
+import 'package:amazon/featutres/home/widgets/carousel_image.dart';
+import 'package:amazon/featutres/home/widgets/deal_of_day.dart';
+import 'package:amazon/featutres/home/widgets/top_categories.dart';
 
 import 'package:flutter/material.dart';
 
@@ -12,9 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void navigateToSearchScreen(String query) {
-   
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +86,19 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: const SingleChildScrollView(
-        child: Column(
-          children: [
-AddressBox(),         
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+            AddressBox(),
+            SizedBox(height: 10,),
+            TopCategories(),
+            SizedBox(height: 10,),
+            CarouselImage(),
+            DealOfDay(),
+          
+          
+            ],
+          ),
         ),
       ),
     );
