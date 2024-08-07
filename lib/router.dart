@@ -1,4 +1,6 @@
 import 'package:amazon/common/widgets/bottom_bar.dart';
+import 'package:amazon/featutres/admin/screens/add_product_screen.dart';
+
 import 'package:amazon/featutres/auth/screens/auth_screen.dart';
 import 'package:amazon/featutres/home/screens/home_screens.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,15 @@ return MaterialPageRoute(
   case BottomBar.routeName:
 return MaterialPageRoute(
   settings: routeSettings,
-  builder: (_)=> const BottomBar(),);
+  builder: (_)=> const BottomBar(),
+  );
+
+  case AddProductScreen.routeName:
+return MaterialPageRoute(
+  settings: routeSettings,
+  builder: (_)=> const AddProductScreen(),
+  
+  );
 
   default : 
   return MaterialPageRoute(
@@ -29,7 +39,8 @@ return MaterialPageRoute(
     body: Center(
       child: Text("Error"),
     ),
-  ),);
+  ),
+  );
 
 }
 }

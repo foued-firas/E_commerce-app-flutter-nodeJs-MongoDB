@@ -1,5 +1,6 @@
 import 'package:amazon/common/widgets/bottom_bar.dart';
 import 'package:amazon/constants/global_variables.dart';
+import 'package:amazon/featutres/admin/screens/admin_screen.dart';
 import 'package:amazon/featutres/auth/screens/auth_screen.dart';
 import 'package:amazon/featutres/auth/services/auth_services.dart';
 import 'package:amazon/featutres/home/screens/home_screens.dart';
@@ -34,6 +35,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Amazon',
       theme: ThemeData(
        scaffoldBackgroundColor: GlobalVariables.backgroundColor,
@@ -49,7 +51,9 @@ class _MyAppState extends State<MyApp> {
         )
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home:  Provider.of<UserProvider>(context).user.token.isNotEmpty ? const BottomBar() :AuthScreen() ,
+      home:  Provider.of<UserProvider>(context).user.token.isNotEmpty ?
+      Provider.of<UserProvider>(context).user.type=='admin' ? AdminScreen() : const BottomBar() 
+      :AuthScreen() ,
     );
   }
 }
