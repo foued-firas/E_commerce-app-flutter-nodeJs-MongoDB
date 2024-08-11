@@ -1,14 +1,14 @@
 import 'package:amazon/constants/global_variables.dart';
+import 'package:amazon/featutres/home/screens/category_deals_screen.dart';
 import 'package:flutter/material.dart';
 
-class TopCategories extends StatefulWidget {
+class TopCategories extends StatelessWidget {
   const TopCategories({super.key});
 
-  @override
-  State<TopCategories> createState() => _TopCategoriesState();
-}
+  void navigateToCategoryPage(BuildContext context , String category){
+     Navigator.pushNamed(context, CategoryDealsScreen.routeName, arguments: category);
+  }
 
-class _TopCategoriesState extends State<TopCategories> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,31 +17,34 @@ class _TopCategoriesState extends State<TopCategories> {
         scrollDirection: Axis.horizontal,
         itemExtent: 80,
         itemBuilder: (context,index){
-        return Column(
-          
-          children: [
-          Container(
+        return GestureDetector(
+          onTap: ()=> navigateToCategoryPage(context , GlobalVariables.categoryImages[index]['title']!),
+          child: Column(
             
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: 
-              Image.asset(
-                GlobalVariables.categoryImages[index]['image']!,
-                fit: BoxFit.cover,
-                height: 40,
-                width: 40,
+            children: [
+            Container(
+              
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: 
+                Image.asset(
+                  GlobalVariables.categoryImages[index]['image']!,
+                  fit: BoxFit.cover,
+                  height: 40,
+                  width: 40,
+                ),
+                 
               ),
-               
             ),
+            Text(GlobalVariables.categoryImages[index]['title']!,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+          
+            ),),
+            ],
           ),
-          Text(GlobalVariables.categoryImages[index]['title']!,
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-
-          ),),
-          ],
         );
       } ,
       itemCount: GlobalVariables.categoryImages.length ,),
