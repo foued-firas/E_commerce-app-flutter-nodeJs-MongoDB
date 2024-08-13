@@ -1,6 +1,7 @@
 import 'package:amazon/common/widgets/loder.dart';
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/featutres/home/widgets/address_box.dart';
+import 'package:amazon/featutres/products_details/screens/product_details_screen.dart';
 import 'package:amazon/featutres/search/services/search_services.dart';
 import 'package:amazon/featutres/search/widget/search_product.dart';
 import 'package:amazon/models/product.dart';
@@ -110,7 +111,15 @@ class _SearchScreenState extends State<SearchScreen> {
         Expanded(child: ListView.builder(
           itemCount: products!.length,
           itemBuilder: (context, index){
-            return SearchProduct(product: products![index],);
+            return GestureDetector
+            
+            (
+              onTap: (){
+                Navigator.pushNamed(context, ProductDetailScreen.routeName, arguments: products![index]);
+              },
+              child: SearchProduct(
+                product: products![index],
+                ));
           },
           
 
