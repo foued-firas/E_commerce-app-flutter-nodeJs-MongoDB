@@ -1,3 +1,7 @@
+import 'package:amazon/common/widgets/loder.dart';
+import 'package:amazon/featutres/home/services/home_services.dart';
+import 'package:amazon/featutres/products_details/screens/product_details_screen.dart';
+import 'package:amazon/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -9,71 +13,88 @@ class DealOfDay extends StatefulWidget {
 }
 
 class _DealOfDayState extends State<DealOfDay> {
+  Product? product;
+  HomeServices homeServices =HomeServices();
+
+  @override
+  void initState() {
+    
+    super.initState();
+    fetchDealOfDay();
+    
+  }
+  void fetchDealOfDay()async{
+    product = await homeServices.fetchDealOfDay(context: context);
+    setState(() {
+      
+    });
+
+    }
+    void navigateToDeatailScreen(){
+      Navigator.pushNamed(context, ProductDetailScreen.routeName, arguments: product );
+    }
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          alignment: Alignment.topLeft,
-          padding: EdgeInsets.only(left: 10,top: 15),
-          child: Text(
-            'Deal of the day',
-            style: TextStyle(
-              fontSize: 20,
+    return product==null? const Loader(): 
+   product!.name.isEmpty? const SizedBox(): 
+   GestureDetector(
+    onTap: () => navigateToDeatailScreen,
 
+     child: Column(
+        children: [
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.only(left: 10,top: 15),
+            child: const Text(
+              'Deal of the day',
+              style: TextStyle(
+                fontSize: 20,
+     
+              ),
             ),
           ),
-        ),
-        Image.network("https://images.unsplash.com/photo-1593078166039-c9878df5c520?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mnw2MzYzNzA1NHx8ZW58MHx8fHx8",
-        height: 235,
-        fit: BoxFit.fitHeight,
-        ),
-        Container(
-          padding: EdgeInsets.only(left: 15),
-          alignment: Alignment.topLeft,
-          child: Text('\$20', style: TextStyle(fontSize: 18),),
-        ),
-        Container(
-          alignment: Alignment.topLeft,
-          padding: EdgeInsets.only(right: 40,top: 5, left: 15),
-          child: Text(
-            'Radio ',
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            ),
-        ),
-        SingleChildScrollView(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.network('https://images.unsplash.com/photo-1550222029-a7a8070f7673?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTh8NjM2MzcwNTR8fGVufDB8fHx8fA%3D%3D',
-              fit: BoxFit.fitWidth,
-              width: 100,
-              height: 100,),
-               Image.network('https://images.unsplash.com/photo-1550222029-a7a8070f7673?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTh8NjM2MzcwNTR8fGVufDB8fHx8fA%3D%3D',
-              fit: BoxFit.fitWidth,
-              width: 100,
-              height: 100,),
-               Image.network('https://images.unsplash.com/photo-1550222029-a7a8070f7673?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTh8NjM2MzcwNTR8fGVufDB8fHx8fA%3D%3D',
-              fit: BoxFit.fitWidth,
-              width: 100,
-              height: 100,),
-              Image.network('https://images.unsplash.com/photo-1550222029-a7a8070f7673?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTh8NjM2MzcwNTR8fGVufDB8fHx8fA%3D%3D',
-              fit: BoxFit.fitWidth,
-              width: 100,
-              height: 100,),
-            ],
+          Image.network(
+            product!.images[0],
+          height: 235,
+          fit: BoxFit.fitHeight,
           ),
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(vertical: 15).copyWith(left: 15),
-          alignment: Alignment.topLeft,
-          child: Text('See all deals',style: TextStyle(
-            color: Colors.cyan[800],
-          ),),
-        )
-      ],
-
-    );
+          Container(
+            padding: const EdgeInsets.only(left: 15),
+            alignment: Alignment.topLeft,
+            child: const Text('\$20', style: TextStyle(fontSize: 18),),
+          ),
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.only(right: 40,top: 5, left: 15),
+            child: const Text(
+              'Radio ',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              ),
+          ),
+          SingleChildScrollView(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: 
+              product!.images.map((e)=> 
+              Image.network(
+                e,
+                fit: BoxFit.fitWidth,
+                width: 100,
+                height: 100,),).
+                toList(),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 15).copyWith(left: 15),
+            alignment: Alignment.topLeft,
+            child: Text('See all deals',style: TextStyle(
+              color: Colors.cyan[800],
+            ),),
+          )
+        ],
+     
+      ),
+   );
   }
 }
