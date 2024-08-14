@@ -31,14 +31,16 @@ class _DealOfDayState extends State<DealOfDay> {
 
     }
     void navigateToDeatailScreen(){
-      Navigator.pushNamed(context, ProductDetailScreen.routeName, arguments: product );
+      Navigator.pushNamed(context, 
+      ProductDetailScreen.routeName, 
+      arguments: product );
     }
   @override
   Widget build(BuildContext context) {
     return product==null? const Loader(): 
    product!.name.isEmpty? const SizedBox(): 
    GestureDetector(
-    onTap: () => navigateToDeatailScreen,
+    onTap:  navigateToDeatailScreen,
 
      child: Column(
         children: [
@@ -73,6 +75,7 @@ class _DealOfDayState extends State<DealOfDay> {
               ),
           ),
           SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: 
