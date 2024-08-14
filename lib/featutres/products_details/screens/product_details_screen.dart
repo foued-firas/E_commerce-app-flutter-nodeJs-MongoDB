@@ -1,6 +1,7 @@
 import 'package:amazon/common/stars.dart';
 import 'package:amazon/common/widgets/custom_button.dart';
 import 'package:amazon/constants/global_variables.dart';
+import 'package:amazon/featutres/products_details/services/product_details_service.dart';
 import 'package:amazon/featutres/search/screen/search_screen.dart';
 import 'package:amazon/models/product.dart';
 import 'package:carousel_slider/carousel_options.dart';
@@ -19,6 +20,7 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  final ProductDetailsService  productDetailsService = ProductDetailsService();
   void navigateToSearchScreen(String query){
         Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
 
@@ -202,7 +204,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             allowHalfRating: true,
             itemCount: 5,
             itemPadding: EdgeInsets.symmetric(horizontal: 4),
-            itemBuilder: (context, _)=> Icon(Icons.star, color: GlobalVariables.secondaryColor,) , onRatingUpdate: (rating){})
+            itemBuilder: (context, _)=>
+             Icon(
+              Icons.star, color: 
+              GlobalVariables.secondaryColor,) ,
+               onRatingUpdate: (rating){
+                productDetailsService.rateProduct(context: context, product: widget.product, rating: rating);
+               })
            
 
 
