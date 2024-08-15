@@ -2,6 +2,7 @@
 
 import 'package:amazon/common/widgets/custom_button.dart';
 import 'package:amazon/constants/global_variables.dart';
+import 'package:amazon/featutres/address/screen/adress_screen.dart';
 import 'package:amazon/featutres/cart/widget/cart_product.dart';
 import 'package:amazon/featutres/cart/widget/cart_subtotal.dart';
 import 'package:amazon/featutres/home/widgets/address_box.dart';
@@ -21,6 +22,9 @@ class _CartScreenState extends State<CartScreen> {
 void navigateToSearchScreen(String query){
         Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
 
+  }
+  void navigateToAddress(){
+    Navigator.pushNamed(context, AdressScreen.routeName);
   }
 
   @override
@@ -102,7 +106,7 @@ void navigateToSearchScreen(String query){
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
                 text: 'Proceed to Buy (${user.cart.length} items)', 
-                onTap: (){},
+                onTap: navigateToAddress,
                    color: Colors.yellow[800],
                 ),
             ),

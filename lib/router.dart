@@ -1,4 +1,5 @@
 import 'package:amazon/common/widgets/bottom_bar.dart';
+import 'package:amazon/featutres/address/screen/adress_screen.dart';
 import 'package:amazon/featutres/admin/screens/add_product_screen.dart';
 
 import 'package:amazon/featutres/auth/screens/auth_screen.dart';
@@ -43,6 +44,14 @@ return MaterialPageRoute(
   builder: (_)=>  ProductDetailScreen(
     product: product,
     ),
+  
+  
+  );
+  case AdressScreen.routeName:
+   
+return MaterialPageRoute(
+  settings: routeSettings,
+  builder: (_)=>  AdressScreen(),
   
   
   );
