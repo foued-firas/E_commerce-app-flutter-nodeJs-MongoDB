@@ -1,5 +1,6 @@
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/featutres/account/screens/account_screen.dart';
+import 'package:amazon/featutres/cart/screen/cart_screen.dart';
 import 'package:amazon/featutres/home/screens/home_screens.dart';
 import 'package:amazon/providers/user_provider.dart';
 import 'package:badges/badges.dart' as badges_package; // Aliasing the badges package
@@ -23,10 +24,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget>pages =[
     const HomeScreen(),
     const AccountScreen(),
-    
-  
-    
-      const Center(child: Text('Cart Page'),),
+      const CartScreen(),
   ];
 
   void _updatePage(int page) {

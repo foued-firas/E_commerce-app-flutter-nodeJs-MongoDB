@@ -29,6 +29,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
   double avgRating =0;
   double myRating=0;
+  void addToCart(){
+    productDetailsService.addToCart(context: context, product: widget.product);
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -45,6 +48,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     }
 
   }
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -200,7 +204,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               text: 'Add to Cart',
              
              
-              onTap: (){},
+              onTap: (){addToCart();},
               color: const Color.fromRGBO(254, 216, 19, 1),
               ),
            ),
