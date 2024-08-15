@@ -30,6 +30,7 @@ class AuthService {
         address: '',
         type: '',
         token: '',
+         cart: [],
        
       );
 

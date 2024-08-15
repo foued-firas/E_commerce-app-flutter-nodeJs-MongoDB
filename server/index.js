@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const authRouter = require('./routes/auth');
 const adminRouter = require('./routes/admin');
 const productRouter = require('./routes/product');
-const userRouter = require('./routes/user');
+const userRouter = require("./routes/user");
 //Initialisation
 const PORT = 1928;
 const app =express();
