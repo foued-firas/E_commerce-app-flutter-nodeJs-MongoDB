@@ -1,3 +1,4 @@
+import 'package:amazon/constants/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
 import 'package:amazon/common/widgets/custom_textfield.dart';
@@ -18,6 +19,7 @@ class _AdressScreenState extends State<AdressScreen> {
   final TextEditingController pincodeController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final _adressFormKey = GlobalKey<FormState>();
+  String addressToBeUsed="";
    
 
   List<PaymentItem> paymentItems = [];
@@ -40,6 +42,28 @@ class _AdressScreenState extends State<AdressScreen> {
 
   void onApplePayResult(res) {}
   void onGooglePayPayResult(res) {}
+  void payPressed(String addressFromProvider){
+    addressToBeUsed="";
+
+    bool isForm = 
+    flatBuildingController.text.isNotEmpty || 
+    areaController.text.isNotEmpty || 
+    pincodeController.text.isNotEmpty || 
+    cityController.text.isNotEmpty ;
+    if(isForm){
+      if(_adressFormKey.currentState!.validate()){
+        addressToBeUsed ='${flatBuildingController.text}, ${areaController.text},${cityController.text} - ${pincodeController.text}';
+
+      }else{
+        throw('Please enter all the values !');
+      } 
+    }else if(addressFromProvider.isNotEmpty){
+      addressToBeUsed =addressFromProvider;
+    }
+    else{
+      showSnackBar(context , 'Error ');
+    }
+  }
 
   Future<PaymentConfiguration> loadPaymentConfiguration() async {
     try {
@@ -132,6 +156,7 @@ class _AdressScreenState extends State<AdressScreen> {
                 paymentItems: paymentItems,
                 margin: const EdgeInsets.only(top: 15),
                 height: 50,
+                onPressed: ()=>payPressed(address),
               ),
 
               const SizedBox(height: 10),
@@ -141,6 +166,7 @@ class _AdressScreenState extends State<AdressScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return GooglePayButton(
+                      onPressed: ()=> payPressed(address),
                       paymentConfiguration: snapshot.data!,
                       onPaymentResult: onGooglePayPayResult,
                       paymentItems: paymentItems,
