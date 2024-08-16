@@ -23,13 +23,17 @@ void navigateToSearchScreen(String query){
         Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
 
   }
-  void navigateToAddress(){
-    Navigator.pushNamed(context, AdressScreen.routeName);
+  void navigateToAddress(int sum){
+    Navigator.pushNamed(context, AdressScreen.routeName, arguments: sum.toString());
   }
 
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserProvider>().user;
+    int sum =0;
+    user.cart.
+    map((e) => 
+    sum += e['quantity'] * e['product']['price'] as int).toList();
     return Scaffold(
       appBar: PreferredSize(
 
@@ -106,7 +110,7 @@ void navigateToSearchScreen(String query){
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
                 text: 'Proceed to Buy (${user.cart.length} items)', 
-                onTap: navigateToAddress,
+                onTap:()=> navigateToAddress(sum),
                    color: Colors.yellow[800],
                 ),
             ),
