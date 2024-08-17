@@ -49,11 +49,11 @@ return MaterialPageRoute(
   
   
   );
-  case OrderDetailsScreen.routeName:
+  case OrderDetailScreen.routeName:
     var order = routeSettings.arguments as Order ;
 return MaterialPageRoute(
   settings: routeSettings,
-  builder: (_)=>  OrderDetailsScreen(
+  builder: (_)=>  OrderDetailScreen(
      order: order,
     ),
   

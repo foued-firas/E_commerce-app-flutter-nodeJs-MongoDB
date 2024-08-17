@@ -63,7 +63,7 @@ class _OrdersState extends State<Orders> {
             itemBuilder: (context , index ) {
               return GestureDetector(
                 onTap: (){
-                  Navigator.pushNamed(context, OrderDetailsScreen.routeName, arguments :orders![index],);
+                  Navigator.pushNamed(context, OrderDetailScreen.routeName, arguments :orders![index],);
                 } ,
                 child: Single_Product(image:
                  orders![index].products[0].images[index]),
