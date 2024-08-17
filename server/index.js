@@ -7,7 +7,7 @@ const adminRouter = require('./routes/admin');
 const productRouter = require('./routes/product');
 const userRouter = require("./routes/user");
 //Initialisation
-const PORT = 1928;
+const PORT = process.env.PORT || 1928;
 const app =express();
 const DB =
 "mongodb+srv://foued:foued123@cluster0.hrmxm12.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
