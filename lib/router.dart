@@ -47,12 +47,12 @@ return MaterialPageRoute(
   
   
   );
-  case AdressScreen.routeName:
+  case AddressScreen.routeName:
    var totalAmount = routeSettings.arguments as String ;
 return MaterialPageRoute(
 
   settings: routeSettings,
-  builder: (_)=>  AdressScreen(
+  builder: (_)=>  AddressScreen(
 totalAmount :totalAmount,
   ),
   

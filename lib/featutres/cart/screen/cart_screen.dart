@@ -24,7 +24,7 @@ void navigateToSearchScreen(String query){
 
   }
   void navigateToAddress(int sum){
-    Navigator.pushNamed(context, AdressScreen.routeName, arguments: sum.toString());
+    Navigator.pushNamed(context, AddressScreen.routeName, arguments: sum.toString());
   }
 
   @override
