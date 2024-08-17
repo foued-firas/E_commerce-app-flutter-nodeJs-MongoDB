@@ -1,5 +1,8 @@
+import 'package:amazon/common/widgets/loder.dart';
 import 'package:amazon/constants/global_variables.dart';
+import 'package:amazon/featutres/account/services/account_services.dart';
 import 'package:amazon/featutres/account/widgets/single_product.dart';
+import 'package:amazon/models/oder.dart';
 import 'package:flutter/material.dart';
 
 class Orders extends StatefulWidget {
@@ -10,18 +13,24 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
+  final AccountServices accountServices =AccountServices();
 
-  List list = [
-    
-    'https://plus.unsplash.com/premium_photo-1721276303391-ee0af231d021?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzN3x8fGVufDB8fHx8fA%3D%3D',
-    'https://plus.unsplash.com/premium_photo-1671439543718-9e4d009827e8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGN8ZW58MHx8MHx8fDA%3D',
-    'https://plus.unsplash.com/premium_photo-1671439543718-9e4d009827e8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGN8ZW58MHx8MHx8fDA%3D',
-    'https://plus.unsplash.com/premium_photo-1671439543718-9e4d009827e8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGN8ZW58MHx8MHx8fDA%3D',
-    'https://plus.unsplash.com/premium_photo-1671439543718-9e4d009827e8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGN8ZW58MHx8MHx8fDA%3D',
-  ];
+ List<Order>?orders;
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchOrders();
+  }
+  void fetchOrders() async {
+    orders =await accountServices.fetchMyOrders(context: context);
+    setState(() {
+      
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return orders ==null ? Loader() : Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,9 +58,10 @@ class _OrdersState extends State<Orders> {
           padding: EdgeInsets.only(left: 10 , top: 20 , right: 0 ),
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: list.length ,
+            itemCount: orders!.length ,
             itemBuilder: (context , index ) {
-              return Single_Product(image: list[index]);
+              return Single_Product(image:
+               orders![index].products[0].images[index]);
             }  ),
 
         )
