@@ -5,8 +5,10 @@ import 'package:amazon/featutres/admin/screens/add_product_screen.dart';
 import 'package:amazon/featutres/auth/screens/auth_screen.dart';
 import 'package:amazon/featutres/home/screens/category_deals_screen.dart';
 import 'package:amazon/featutres/home/screens/home_screens.dart';
+import 'package:amazon/featutres/order_details/screen/order_details.dart';
 import 'package:amazon/featutres/products_details/screens/product_details_screen.dart';
 import 'package:amazon/featutres/search/screen/search_screen.dart';
+import 'package:amazon/models/oder.dart';
 import 'package:amazon/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -43,6 +45,16 @@ return MaterialPageRoute(
   settings: routeSettings,
   builder: (_)=>  ProductDetailScreen(
     product: product,
+    ),
+  
+  
+  );
+  case OrderDetailsScreen.routeName:
+    var order = routeSettings.arguments as Order ;
+return MaterialPageRoute(
+  settings: routeSettings,
+  builder: (_)=>  OrderDetailsScreen(
+     order: order,
     ),
   
   
