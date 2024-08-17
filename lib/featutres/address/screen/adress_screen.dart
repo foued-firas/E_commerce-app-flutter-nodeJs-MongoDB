@@ -1,8 +1,12 @@
 import 'package:amazon/constants/utils.dart';
+import 'package:amazon/featutres/address/services/address_services.dart';
+import 'package:amazon/featutres/address/services/address_services.dart';
+import 'package:amazon/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
 import 'package:amazon/common/widgets/custom_textfield.dart';
 import 'package:amazon/constants/global_variables.dart';
+import 'package:provider/provider.dart';
 
 class AdressScreen extends StatefulWidget {
   const AdressScreen({super.key, required this.totalAmount});
@@ -20,6 +24,7 @@ class _AdressScreenState extends State<AdressScreen> {
   final TextEditingController cityController = TextEditingController();
   final _adressFormKey = GlobalKey<FormState>();
   String addressToBeUsed="";
+  final AddressServices addressServices =AddressServices();
    
 
   List<PaymentItem> paymentItems = [];
@@ -40,7 +45,12 @@ class _AdressScreenState extends State<AdressScreen> {
     cityController.dispose();
   }
 
-  void onApplePayResult(res) {}
+  void onApplePayResult(res) {
+    if(Provider.of<UserProvider>(context).user.address.isEmpty){
+      addressServices.saveUserAddress(context: context, address: addressToBeUsed);
+
+    }
+  }
   void onGooglePayPayResult(res) {}
   void payPressed(String addressFromProvider){
     addressToBeUsed="";
@@ -78,7 +88,7 @@ class _AdressScreenState extends State<AdressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var address = '101 Fake Street';
+    var address = context.watch<UserProvider>().user.address;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
