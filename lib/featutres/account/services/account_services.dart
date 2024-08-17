@@ -45,5 +45,12 @@ class AccountServices {
     return orderList;
   }
 
-  
+  void logOut(BuildContext context) async{
+    try{
+      
+
+    }catch(e){
+      showSnackBar(context, e.toString());
+    }
+  }
 }
