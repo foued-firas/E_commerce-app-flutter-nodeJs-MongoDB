@@ -9,6 +9,7 @@ import 'package:amazon/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 void main() {
   runApp( MultiProvider(providers:[
     ChangeNotifierProvider(
@@ -48,7 +49,8 @@ class _MyAppState extends State<MyApp> {
           iconTheme: IconThemeData(
             color: Colors.black,
           )
-        )
+        ),
+        useMaterial3: true,
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home:  Provider.of<UserProvider>(context).user.token.isNotEmpty ?
